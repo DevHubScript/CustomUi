@@ -1,4 +1,5 @@
-local Slash = {}
+
+local MIDN = {}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -10,11 +11,11 @@ local user
 local tag
 local userinfo = {}
 
-_G.Slash = "Slash"
+_G.MIDN = "MIDN"
 _G.Version = "Paid"
 
-if game.CoreGui:FindFirstChild(_G.Slash .."," .. _G.Version) then
-	game.CoreGui:FindFirstChild(_G.Slash .."," .. _G.Version):Destroy()
+if game.CoreGui:FindFirstChild(_G.MIDN .."," .. _G.Version) then
+	game.CoreGui:FindFirstChild(_G.MIDN .."," .. _G.Version):Destroy()
 end
 
 pcall(function()
@@ -29,7 +30,7 @@ local function SaveInfo()
 	userinfo["pfp"] = pfp
 	userinfo["user"] = user
 	userinfo["tag"] = tag
-	writefile("Slash.txt", HttpService:JSONEncode(userinfo));
+	writefile("MIDN.txt", HttpService:JSONEncode(userinfo));
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -79,19 +80,19 @@ local function MakeDraggable(topbarobject, object)
 		end)
 end
 
-local SlashPaid = Instance.new("ScreenGui")
-SlashPaid.Name = _G.Slash .."," .. _G.Version
-SlashPaid.Parent = game.CoreGui
-SlashPaid.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local MIDNPaid = Instance.new("ScreenGui")
+MIDNPaid.Name = _G.MIDN .."," .. _G.Version
+MIDNPaid.Parent = game.CoreGui
+MIDNPaid.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 game:GetService("UserInputService").InputBegan:connect(function(inputObject, gameProcessedEvent)
 	if inputObject.KeyCode == Enum.KeyCode.RightControl then
 		wait()
-		SlashPaid.Enabled = not SlashPaid.Enabled
+		MIDNPaid.Enabled = not MIDNPaid.Enabled
 	end
 end)
 
-function Slash:Window(text)
+function MIDN:Window(text)
 	local currentservertoggled = ""
 	local minimized = false
 	local fs = false
@@ -119,7 +120,7 @@ function Slash:Window(text)
 	local TopFrameHolder = Instance.new("Frame")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = SlashPaid
+	MainFrame.Parent = MIDNPaid
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(15,15,15)
 	MainFrame.BorderSizePixel = 0
@@ -1531,7 +1532,7 @@ function Slash:Window(text)
 
 	end)
 
-	function Slash:Notification(titletext, desctext, btntext)
+	function MIDN:Notification(titletext, desctext, btntext)
 		local NotificationHolderMain = Instance.new("TextButton")
 		local Notification = Instance.new("Frame")
 		local NotificationCorner = Instance.new("UICorner")
