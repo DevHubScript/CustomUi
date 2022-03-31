@@ -1691,7 +1691,7 @@ function Slash:Window(text)
 		ImageMain.BackgroundTransparency = 1.000
 		ImageMain.Position = UDim2.new(0, 0, 0.2, 0)
 		ImageMain.Size = UDim2.new(0, 23, 0, 23)
-		ImageMain.Image = "http://www.roblox.com/asset/?id=9242414453"
+		ImageMain.Image = "http://www.roblox.com/asset/?id=6034818372"
 		ImageMain.ImageColor3 = Color3.fromRGB(255, 255, 255)
 
 		Server.Name = text .. "Server"
