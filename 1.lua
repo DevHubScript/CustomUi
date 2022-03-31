@@ -2635,7 +2635,7 @@ function Slash:Window(text)
 				ArrowImg.BackgroundTransparency = 1.000
 				ArrowImg.Position = UDim2.new(1.84974098, 0, 0.167428851, 0)
 				ArrowImg.Size = UDim2.new(0, 22, 0, 22)
-				ArrowImg.Image = "http://www.roblox.com/asset/?id=4430382124"
+				ArrowImg.Image = "http://www.roblox.com/asset/?id=6034818372"
 				ArrowImg.ImageColor3 = _G.Color
 
 				DropdownFrameBtn.Name = "DropdownFrameBtn"
