@@ -409,7 +409,7 @@ function library:AddWindow(text,keybind)
                 
                 Line.Name = "Line"
                 Line.Parent = Linee
-                Line.BackgroundColor3 = Color3.fromRGB(255,0,0)
+                Line.BackgroundColor3 = Color3.fromRGB(5, 135, 38)
                 Line.BorderSizePixel = 0
                 Line.Position = UDim2.new(0, 0, 0, 10)
                 Line.Size = UDim2.new(0, 260, 0, 1)
