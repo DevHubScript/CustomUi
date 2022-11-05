@@ -1247,12 +1247,12 @@ function library:AddWindow(text,keybind)
                         TweenService:Create(
                             Toggle,
                             TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                            {BackgroundColor3 = Color3.fromRGB(233,63,63)}
+                            {BackgroundColor3 = Color3.fromRGB(5, 135, 38)}
 				        ):Play()
                         TweenService:Create(
                             ToggleLabel,
                             TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                            {TextColor3 = Color3.fromRGB(233,63,63)}
+                            {TextColor3 = Color3.fromRGB(5, 135, 38)}
                         ):Play()
                     end
                     pcall(callback,istoggled)
