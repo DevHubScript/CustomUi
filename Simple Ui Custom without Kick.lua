@@ -59,9 +59,9 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local library = {}
+local  SlashSimple = {}
 
-function library:AddWindow(text,keybind)
+function  SlashSimple:AddWindow(text,keybind)
     local currenttab = ""
     local uihide = false
     local abc = false
@@ -1276,4 +1276,4 @@ function library:AddWindow(text,keybind)
     end
     return Ui
 end
-return library
+return  SlashSimple
