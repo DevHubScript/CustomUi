@@ -21,3 +21,41 @@ window:Slider("Speed", 0, 100, function(v)
     print("Slider value:", v)
 end)
 -----------------------------------------------------------
+Simple Lib :
+local win = library:AddWindow("")
+
+local MainTab = win:AddTab("Main")
+
+local Main1 = MainTab:AddPage()
+
+Main1:AddSeperator("Welcome to Hub")
+
+Main1:AddLabel("Game : YaY")
+
+local timelabel = Main1:AddLabel("Server Time")
+spawn(function()
+    while Wait() do 
+        pcall(function()
+            local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+            local Hour = math.floor(GameTime/(60^2))%24
+            local Minute = math.floor(GameTime/(60^1))%60
+            local Second = math.floor(GameTime/(60^0))%60
+            timelabel:Set("Server Time : "..Hour.."h "..Minute.."m "..Second.."s")
+        end)
+    end
+end)
+Main1:AddLabel("Can Refresh")
+Main1:AddSeperator("WoW")
+Main2:AddToggle("YaY",Config,function(value)
+    Config = value
+end)
+local hihihi = Main1:AddDropdown("Players",{"playername"},function(value)
+    playerrr = value
+end)
+Main1:AddButton("Refresh ",function()
+    hihihi:Clear()
+	hihihi:Add("Wd")
+	end
+end)
+Main1:AddSlider("text",0,100,20,function(value)
+end)
