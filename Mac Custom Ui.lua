@@ -442,8 +442,8 @@ end
 			if not text or typeof(text) ~= 'string' then
 				return sendNotification('Invalid Text!', 'You must set the text as a string for this label!')
 			end
-
-			SlashMacLIB:Create(window, 'TextLabel', {
+			local labell = {}
+			local Label = SlashMacLIB:Create(window, 'TextLabel', {
 				BackgroundTransparency = 1;
 
 				Position = UDim2.new(0,12,0,height-5);
@@ -461,8 +461,10 @@ end
 
 			height = height + 15
 			window.Size = UDim2.new(0,200,0,height)
-
-			return windowModule
+				function labell:Set(newtext)
+					Label.Text = newtext
+				end
+			return labell
 		end
 
 		------------------
