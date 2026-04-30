@@ -440,19 +440,28 @@ end
 		local windowModule = {}
 		function windowModule:Label(text)
 			if not text or typeof(text) ~= 'string' then
-				return sendNotification('Invalid Text!', 'You must set the text as a string for this button!')
+				return sendNotification('Invalid Text!', 'You must set the text as a string for this label!')
 			end
+
 			SlashMacLIB:Create(window, 'TextLabel', {
-				Position = UDim2.new(.5,0,0,height-10);
-				TextSize = 10;
-				TextXAlignment = 2;
-				TextYAlignment = 0;
+				BackgroundTransparency = 1;
+
+				Position = UDim2.new(0,12,0,height-5);
+				Size = UDim2.new(0,170,0,15);
+
+				TextSize = 12;
+				Font = Enum.Font.Gotham;
+
+				TextXAlignment = Enum.TextXAlignment.Left;
+				TextYAlignment = Enum.TextYAlignment.Center;
+
 				Text = text or 'Untitled';
 				TextColor3 = Main.COLOR.TEXT;
 			})
 
-			height = height + 24
+			height = height + 15
 			window.Size = UDim2.new(0,200,0,height)
+
 			return windowModule
 		end
 
@@ -542,22 +551,19 @@ function windowModule:Toggle(text, callback)
         AutoButtonColor = false,
     })
 
-    -- corner
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0,6)
     corner.Parent = btn
 
-    -- padding text
     local pad = Instance.new("UIPadding")
     pad.PaddingLeft = UDim.new(0,8)
     pad.Parent = btn
 
-    -- indicator (จุดวงกลม)
     local dot = Instance.new("Frame")
     dot.Size = UDim2.new(0,10,0,10)
     dot.Position = UDim2.new(1,-16,0.5,0)
     dot.AnchorPoint = Vector2.new(0.5,0.5)
-    dot.BackgroundColor3 = Color3.fromRGB(120,120,120) -- off (muted gray)
+    dot.BackgroundColor3 = Color3.fromRGB(120,120,120)
     dot.Parent = btn
 
     local dotCorner = Instance.new("UICorner")
@@ -570,7 +576,6 @@ function windowModule:Toggle(text, callback)
     stroke.Color = Color3.fromRGB(90,90,90)
     stroke.Parent = dot
 
-    -- tween
     local tweenService = game:GetService("TweenService")
 
     local function tween(obj, prop)
@@ -1056,28 +1061,57 @@ end
 
 		------------------
 
-		function windowModule:Text(placeholderText)
-			local tbl = {Text = ''}
-			local txtBox = SlashMacLIB:Create(window, 'TextBox', {
-				BackgroundColor3 = Color3.fromRGB(150,150,150);
-				ClearTextOnFocus = false;
-				PlaceholderColor3 = Color3.fromRGB(255,255,255);
-				PlaceholderText = placeholderText or '';
-				Position = UDim2.new(0,10,0,height-10);
-				Size = UDim2.new(0, 180, 0, 20);
-				Text = '';
-				TextColor3 = Color3.fromRGB(40,40,40);
-			})
+function windowModule:Text(placeholderText)
+    local tbl = {Text = ''}
 
-			txtBox.Changed:connect(function()
-				tbl.Text = txtBox.Text
-			end)
+    -- 🔳 กล่องพื้นหลัง (เล็กลง)
+    local bg = SlashMacLIB:Create(window, 'Frame', {
+        BackgroundColor3 = Color3.fromRGB(240,240,245);
+        Position = UDim2.new(0,10,0,height-5);
+        Size = UDim2.new(0,180,0,20); -- 🔽 จาก 180x28 → 165x22
+    })
 
-			height = height + 20
-			window.Size = UDim2.new(0,200,0,height)
+    SlashMacLIB:Create(bg, 'UICorner', {
+        CornerRadius = UDim.new(0,6) -- 🔽 โค้งน้อยลงให้พอดีไซส์
+    })
 
-			return tbl
-		end
+    -- ✏️ TextBox
+    local txtBox = SlashMacLIB:Create(bg, 'TextBox', {
+        BackgroundTransparency = 1;
+        ClearTextOnFocus = false;
+        PlaceholderColor3 = Color3.fromRGB(150,150,150);
+        PlaceholderText = placeholderText or "Text...";
+
+        Size = UDim2.new(1,-8,1,0);
+        Position = UDim2.new(0,8,0,0);
+
+        Text = '';
+        TextColor3 = Color3.fromRGB(35,35,35);
+        TextSize = 12; -- 🔽 จาก 14 → 12
+        Font = Enum.Font.Gotham;
+
+        TextXAlignment = Enum.TextXAlignment.Left;
+    })
+
+    -- ✨ focus effect
+    txtBox.Focused:Connect(function()
+        bg.BackgroundColor3 = Color3.fromRGB(220,220,230)
+    end)
+
+    txtBox.FocusLost:Connect(function()
+        bg.BackgroundColor3 = Color3.fromRGB(240,240,245)
+    end)
+
+    -- 📥 update ค่า
+    txtBox:GetPropertyChangedSignal("Text"):Connect(function()
+        tbl.Text = txtBox.Text
+    end)
+
+    height = height + 24 -- 🔽 spacing กระชับขึ้น
+    window.Size = UDim2.new(0,200,0,height)
+
+    return tbl
+end
 
 		------------------
 
@@ -1152,6 +1186,3 @@ end
 	end
 end
 return SlashMacLIB
-
-
-
