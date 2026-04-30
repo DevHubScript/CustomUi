@@ -73,62 +73,95 @@ do
 	getgenv().UILibrary_Loading = true
 
 	if Drawing then
-		local draw = Drawing.new('Square')
-		draw.Size = Vector2.new(0,0)
-		draw.Color = Color3.fromRGB(20,20,20)
-		draw.Transparency = 1
-		draw.Filled = true
-		draw.Visible = true
-		for i=0,100,1 do
-			Main.Services.RunService.RenderStepped:wait()
-			draw.Position = Vector2.new(
-				(workspace.CurrentCamera.ViewportSize.X / 2) - i,
-				(workspace.CurrentCamera.ViewportSize.Y / 2) - i
-			)
-			draw.Size = Vector2.new(draw.Size.X+2,draw.Size.Y+2)
-		end
+    local RunService = game:GetService("RunService")
+    local camera = workspace.CurrentCamera
+    local center = Vector2.new(camera.ViewportSize.X/2, camera.ViewportSize.Y/2)
 
-		draw.Transparency = 1
-		local text = Drawing.new('Text')
-		text.Text = 'UI Library\n\n\n\nDeveloped By:\nKingUnspirited'
-		text.Center = true
-		text.Color = Color3.fromRGB(255,255,255)
-		text.Size = 30
-		text.Position = Vector2.new(
-			(workspace.CurrentCamera.ViewportSize.X / 2),
-			(workspace.CurrentCamera.ViewportSize.Y / 2)-92
-		)
-		text.Transparency = 0
-		text.Visible = true
-		for i=0,1,.01 do
-			Main.Services.RunService.RenderStepped:wait()
-			text.Transparency = i
-		end
-		text.Transparency = 1
-		wait(1)
-		for i=1,0,-.01 do
-			Main.Services.RunService.RenderStepped:wait()
-			text.Transparency = i
-		end
-		for i=100,0,-1 do
-			Main.Services.RunService.RenderStepped:wait()
-			draw.Position = Vector2.new(
-				(workspace.CurrentCamera.ViewportSize.X / 2) - i,
-				(workspace.CurrentCamera.ViewportSize.Y / 2) - i
-			)
-			draw.Size = Vector2.new(draw.Size.X-2,draw.Size.Y-2)
-		end
-		draw:Remove()
-		text:Remove()
-	end
+    local bg = Drawing.new("Square")
+    bg.Size = camera.ViewportSize
+    bg.Position = Vector2.new(0,0)
+    bg.Color = Color3.fromRGB(245,245,247)
+    bg.Filled = true
+    bg.Transparency = 0
+    bg.Visible = true
+
+    for i = 0,1,0.05 do
+        bg.Transparency = i
+        RunService.RenderStepped:Wait()
+    end
+
+    local logo = Drawing.new("Circle")
+    logo.Radius = 0
+    logo.Position = center
+    logo.Color = Color3.fromRGB(0,0,0)
+    logo.Filled = true
+    logo.Transparency = 1
+    logo.Visible = true
+
+    for i = 1,40 do
+        RunService.RenderStepped:Wait()
+        logo.Radius = i
+    end
+
+    local text = Drawing.new("Text")
+    text.Text = "Loading..."
+    text.Center = true
+    text.Color = Color3.fromRGB(60,60,60)
+    text.Size = 20
+    text.Position = center + Vector2.new(0,60)
+    text.Transparency = 1
+    text.Visible = true
+
+    for i = 0,1,0.05 do
+        RunService.RenderStepped:Wait()
+        text.Transparency = i
+    end
+
+    local barBg = Drawing.new("Square")
+    barBg.Size = Vector2.new(200,6)
+    barBg.Position = center + Vector2.new(-100,100)
+    barBg.Color = Color3.fromRGB(220,220,220)
+    barBg.Filled = true
+    barBg.Transparency = 1
+    barBg.Visible = true
+
+    local bar = Drawing.new("Square")
+    bar.Size = Vector2.new(0,6)
+    bar.Position = barBg.Position
+    bar.Color = Color3.fromRGB(0,0,0)
+    bar.Filled = true
+    bar.Transparency = 1
+    bar.Visible = true
+
+    for i = 0,200 do
+        RunService.RenderStepped:Wait()
+        bar.Size = Vector2.new(i,6)
+    end
+
+    task.wait(0.5)
+
+    for i = 1,0,-0.03 do
+        RunService.RenderStepped:Wait()
+        bg.Transparency = i
+        logo.Transparency = i
+        text.Transparency = i
+        bar.Transparency = i
+        barBg.Transparency = i
+    end
+
+    bg:Remove()
+    logo:Remove()
+    text:Remove()
+    bar:Remove()
+    barBg:Remove()
+end
 
 	getgenv().UILibrary_Loading = false
 
 	Main.GUI = Instance.new('ScreenGui', Main.Services.CoreGui)
     Main.GUI.ZIndexBehavior = Enum.ZIndexBehavior.Global
 	Main.GUI.Name = 'LB UI Library' .. getService('HttpService'):GenerateGUID()
-	sendNotification('UI Library Loaded!', 'Press F1 to show/hide windows!\n- KingUnspirited')
-	sendNotification('Credits', '`Someone Insane` for giving me an idea to use the style of a mac button!')
+	sendNotification('Library Loaded!', 'Press F1 to show/hide windows!\n - Palmheungmin')
 
 	function SlashMacLIB:Create(window, instance, props)
 		local a = Instance.new(instance)
@@ -1118,3 +1151,6 @@ end
 	end
 end
 return SlashMacLIB
+
+
+
