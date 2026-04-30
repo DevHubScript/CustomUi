@@ -1061,57 +1061,54 @@ end
 
 		------------------
 
-function windowModule:Text(placeholderText)
-    local tbl = {Text = ''}
+		function windowModule:Text(placeholderText)
+			local tbl = {Text = ''}
 
-    -- 🔳 กล่องพื้นหลัง (เล็กลง)
-    local bg = SlashMacLIB:Create(window, 'Frame', {
-        BackgroundColor3 = Color3.fromRGB(240,240,245);
-        Position = UDim2.new(0,10,0,height-5);
-        Size = UDim2.new(0,180,0,20); -- 🔽 จาก 180x28 → 165x22
-    })
+			local bg = SlashMacLIB:Create(window, 'Frame', {
+				BackgroundColor3 = Color3.fromRGB(240,240,245);
+				Position = UDim2.new(0,10,0,height-5);
+				Size = UDim2.new(0,180,0,20);
+			})
 
-    SlashMacLIB:Create(bg, 'UICorner', {
-        CornerRadius = UDim.new(0,6) -- 🔽 โค้งน้อยลงให้พอดีไซส์
-    })
+			SlashMacLIB:Create(bg, 'UICorner', {
+				CornerRadius = UDim.new(0,6)
+			})
 
-    -- ✏️ TextBox
-    local txtBox = SlashMacLIB:Create(bg, 'TextBox', {
-        BackgroundTransparency = 1;
-        ClearTextOnFocus = false;
-        PlaceholderColor3 = Color3.fromRGB(150,150,150);
-        PlaceholderText = placeholderText or "Text...";
+			local txtBox = SlashMacLIB:Create(bg, 'TextBox', {
+				BackgroundTransparency = 1;
+				ClearTextOnFocus = false;
+				PlaceholderColor3 = Color3.fromRGB(150,150,150);
+				PlaceholderText = placeholderText or "Text...";
 
-        Size = UDim2.new(1,-8,1,0);
-        Position = UDim2.new(0,8,0,0);
+				Size = UDim2.new(1,-8,1,0);
+				Position = UDim2.new(0,8,0,0);
 
-        Text = '';
-        TextColor3 = Color3.fromRGB(35,35,35);
-        TextSize = 12; -- 🔽 จาก 14 → 12
-        Font = Enum.Font.Gotham;
+				Text = '';
+				TextColor3 = Color3.fromRGB(35,35,35);
+				TextSize = 12; -- 🔽 จาก 14 → 12
+				Font = Enum.Font.Gotham;
 
-        TextXAlignment = Enum.TextXAlignment.Left;
-    })
+				TextXAlignment = Enum.TextXAlignment.Left;
+			})
 
-    -- ✨ focus effect
-    txtBox.Focused:Connect(function()
-        bg.BackgroundColor3 = Color3.fromRGB(220,220,230)
-    end)
 
-    txtBox.FocusLost:Connect(function()
-        bg.BackgroundColor3 = Color3.fromRGB(240,240,245)
-    end)
+			txtBox.Focused:Connect(function()
+				bg.BackgroundColor3 = Color3.fromRGB(220,220,230)
+			end)
 
-    -- 📥 update ค่า
-    txtBox:GetPropertyChangedSignal("Text"):Connect(function()
-        tbl.Text = txtBox.Text
-    end)
+			txtBox.FocusLost:Connect(function()
+				bg.BackgroundColor3 = Color3.fromRGB(240,240,245)
+			end)
 
-    height = height + 24 -- 🔽 spacing กระชับขึ้น
-    window.Size = UDim2.new(0,200,0,height)
+			txtBox:GetPropertyChangedSignal("Text"):Connect(function()
+				tbl.Text = txtBox.Text
+			end)
 
-    return tbl
-end
+			height = height + 24 -- 🔽 spacing กระชับขึ้น
+			window.Size = UDim2.new(0,200,0,height)
+
+			return tbl
+		end
 
 		------------------
 
