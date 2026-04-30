@@ -1,0 +1,23 @@
+Mac Lib :
+local window = SlashMacLIB:AddWindow("test")
+
+window:Toggle("Test Toggle", function()
+    toggleState = not toggleState
+    print("Toggle:", toggleState)
+
+local dropdown =  window:Selection("Players", playerlist, function(value)
+    playerlist = value
+    print("Selected: " .. value)
+end)
+window:Button("Refresh", function()
+    dropdown:Clear()
+
+    for i,v in pairs(game.Players:GetChildren()) do  
+		dropdown:Add(v.Name)
+	end
+end)
+
+window:Slider("Speed", 0, 100, function(v)
+    print("Slider value:", v)
+end)
+-----------------------------------------------------------
