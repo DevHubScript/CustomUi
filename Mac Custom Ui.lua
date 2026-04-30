@@ -250,6 +250,7 @@ end
 			TextXAlignment = 2;
 			TextYAlignment = 0;
 			Text = title or 'Untitled';
+			Font = Enum.Font.Gotham;
 		})
 		
 		------------------
